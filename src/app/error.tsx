@@ -10,7 +10,11 @@ export default function Erro({ error, reset }: { error: Error & { digest?: strin
       <h1 className="text-lg font-semibold">Não foi possível carregar esta página</h1>
       <p className="text-sm text-zinc-600 dark:text-zinc-400">
         Verifique se o Supabase está no ar e se as variáveis de ambiente estão configuradas. O detalhe do erro está nos
-        logs da Vercel{error.digest ? ` (código ${error.digest})` : ""}.
+        logs da Vercel{error.digest ? ` (código ${error.digest})` : ""}. Para conferir a configuração, abra a página{" "}
+        <a href="/diagnostico" className="underline">
+          Diagnóstico
+        </a>
+        .
       </p>
       {process.env.NODE_ENV === "development" && <pre className="text-xs whitespace-pre-wrap text-red-600">{error.message}</pre>}
       <button className={estiloBotao} onClick={reset}>
