@@ -21,6 +21,7 @@ const schemaResposta = z.object({
 });
 
 // Etapa 4: avalia os maiores grupos como oportunidade de negócio (um grupo por chamada).
+// Só entram grupos com pelo menos PARAMETROS.minimoMencoesParaNota menções.
 // Grupos que já têm nota são pulados, então a etapa pode ser retomada a qualquer momento.
 export async function pontuar(rodada: Rodada, prazo: number): Promise<ResultadoEtapa> {
   const grupos = verificar(
@@ -28,6 +29,7 @@ export async function pontuar(rodada: Rodada, prazo: number): Promise<ResultadoE
       .from("clusters")
       .select("*")
       .eq("rodada_id", rodada.id)
+      .gte("ocorrencias", PARAMETROS.minimoMencoesParaNota)
       .order("ocorrencias", { ascending: false })
       .limit(PARAMETROS.gruposParaPontuar),
   ) as Cluster[];

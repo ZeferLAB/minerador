@@ -2,6 +2,8 @@ import { connection } from "next/server";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { ContinuarRodada } from "@/components/ContinuarRodada";
+import { DicasResultados } from "@/components/DicasResultados";
+import { PARAMETROS } from "@/config/parametros";
 import { ListaOportunidades } from "@/components/ListaOportunidades";
 import { Carregando, Cartao, ROTULO_STATUS, formatarData } from "@/components/ui";
 import { oportunidadesDaRodada } from "@/lib/consultas";
@@ -81,6 +83,8 @@ async function ConteudoRodada({ params }: { params: Promise<{ id: string }> }) {
         {rodada.status !== "concluida" && <ContinuarRodada rodadaId={rodada.id} comErro={!!rodada.erro} />}
       </Cartao>
 
+      {rodada.status === "concluida" && <DicasResultados totais={t} />}
+
       <Cartao>
         <h2 className="mb-2 font-semibold">Oportunidades</h2>
         <ListaOportunidades itens={oportunidades} />
@@ -88,7 +92,11 @@ async function ConteudoRodada({ params }: { params: Promise<{ id: string }> }) {
 
       {outrosGrupos.length > 0 && (
         <Cartao>
-          <h2 className="mb-2 font-semibold">Outros grupos encontrados (sem nota)</h2>
+          <h2 className="mb-1 font-semibold">Outros grupos encontrados (sem nota)</h2>
+          <p className="mb-2 text-xs text-zinc-500">
+            Dores com menos de {PARAMETROS.minimoMencoesParaNota} menções, ou além das {PARAMETROS.gruposParaPontuar} maiores. Podem
+            crescer nas próximas rodadas.
+          </p>
           <ul className="space-y-1 text-sm">
             {outrosGrupos.map((g) => (
               <li key={g.id} className="flex gap-2">

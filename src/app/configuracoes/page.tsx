@@ -1,5 +1,6 @@
 import { connection } from "next/server";
 import { Suspense } from "react";
+import { DicasResultados } from "@/components/DicasResultados";
 import { FormAcao } from "@/components/FormAcao";
 import { Carregando, Cartao, Titulo, estiloBotao, estiloBotaoSecundario, estiloCampo } from "@/components/ui";
 import { db, verificar } from "@/lib/supabase";
@@ -12,6 +13,7 @@ export default function Configuracoes() {
     <>
       <Titulo>Configurações</Titulo>
       <div className="space-y-6">
+        <DicasResultados />
         <Cartao>
           <h2 className="mb-3 font-semibold">Novo nicho</h2>
           <FormAcao acao={criarNicho} className="space-y-2">

@@ -16,6 +16,7 @@ export const PARAMETROS = {
 
   // Pontuação (IA)
   gruposParaPontuar: 10, // quantos dos maiores grupos viram oportunidade com nota
+  minimoMencoesParaNota: 3, // grupos com menos menções que isso não recebem nota (são ruído)
   exemplosPorGrupo: 8, // quantos comentários de exemplo a IA lê para dar a nota
 
   // Ritmo e tempo

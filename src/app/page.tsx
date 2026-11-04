@@ -1,6 +1,7 @@
 import { connection } from "next/server";
 import Link from "next/link";
 import { Suspense } from "react";
+import { DicasResultados } from "@/components/DicasResultados";
 import { ListaOportunidades } from "@/components/ListaOportunidades";
 import { Carregando, Cartao, StatusRodadaBadge, Titulo, estiloBotao, formatarData } from "@/components/ui";
 import { oportunidadesDaRodada } from "@/lib/consultas";
@@ -14,6 +15,9 @@ export default function Painel() {
   return (
     <>
       <Titulo>Painel</Titulo>
+      <div className="mb-6">
+        <DicasResultados />
+      </div>
       <Suspense fallback={<Carregando />}>
         <ConteudoPainel />
       </Suspense>
